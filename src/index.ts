@@ -111,8 +111,14 @@ const data: IData = {
 
 const server = jsonServer.create();
 const router = jsonServer.router(data);
+const options: any = {
+    noCors: false, // any endpoint can access this server
+    delay: 1000,
+};
+const middlewares = jsonServer.defaults(options);
+server.use(middlewares);
 server.use(router);
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
     console.log('JSON Server is running on port', PORT)
 });
